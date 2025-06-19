@@ -18,4 +18,6 @@ void scale_crop(char *sourcepath, int center_X, int center_Y, int W, int H);
 char* min_pixel(char *source_path);
 char* max_component(char *source_path,char color_pixel);
 char* min_component(char *source_path, char color_pixel);
+void stat_report(char *source_path);
+
 #endif
