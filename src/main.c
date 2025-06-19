@@ -80,6 +80,4 @@ int main(int argc, char **argv) {
     scale_crop(configuration.filenames[0],atoi(configuration.arguments[0]) ,atoi(configuration.arguments[1]) ,atoi(configuration.arguments[2]) ,atoi(configuration.arguments[3]));
   }
 }
-  
-}
 

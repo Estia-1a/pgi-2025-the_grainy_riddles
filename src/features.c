@@ -45,16 +45,17 @@ void first_pixel(char* source_path){
     unsigned char* mirror_hor_data=malloc(W*H*CH);
     for(Y=0;Y<H;Y++){
         for(X=0;X<W;X++){
-            pixelRGB*current_pixel=get_pixel(data,W,H,CH,X,Y);
+            pixelRGB *current_pixel=get_pixel(data,W,H,CH,X,Y);
             int Xnew=W-1-X;
             int Ynew=Y;
-            pixelRGB*mirror_hor_pixel = get_pixel(mirror_hor_data,W,H,CH,Xnew,Ynew);
-            mirror_hor_pixel->R=current_pixel->R;
-            mirror_hor_pixel->G=current_pixel->G;
-            mirror_hor_pixel->B=current_pixel->B;
+            pixelRGB* mirror_hor_pixel = get_pixel(mirror_hor_data,W,H,CH,Xnew,Ynew);
+            mirror_hor_pixel->R = current_pixel->R;
+            mirror_hor_pixel->G = current_pixel->G;
+            mirror_hor_pixel->B = current_pixel->B;
         }
     }
     write_image_data("image_out.bmp", mirror_hor_data,W,H);
+    free(mirror_hor_data);
 }
 
 void tenth_pixel (char *source_path) {
@@ -115,16 +116,17 @@ void rotate_acw(char *source_path){
     unsigned char* rotate_acw_data = calloc(W*H*CH,sizeof(unsigned char));
     for(Y=0;Y<H;Y++){
         for(X=0;X<W;X++){
-            pixelRGB*current_pixel=get_pixel(data,W,H,CH,X,Y);
+            pixelRGB* current_pixel=get_pixel(data,W,H,CH,X,Y);
             int Xnew=Y;
             int Ynew=W-1-X;
-            pixelRGB*rotate_acw_pixel=get_pixel(rotate_acw_data,H,W,CH,Xnew,Ynew);
-            rotate_acw_pixel->R=current_pixel->R;
-            rotate_acw_pixel->G=current_pixel->G;
-            rotate_acw_pixel->B=current_pixel->B;
+            pixelRGB* rotate_acw_pixel=get_pixel(rotate_acw_data,H,W,CH,Xnew,Ynew);
+            rotate_acw_pixel->R = current_pixel->R;
+            rotate_acw_pixel->G = current_pixel->G;
+            rotate_acw_pixel->B = current_pixel->B;
         }
     }
     write_image_data("image_out.bmp", rotate_acw_data,H,W);
+    free (rotate_acw_data);
 }
 void mirror_vertical(char *source_path){
    unsigned char* data=NULL;
@@ -133,34 +135,37 @@ void mirror_vertical(char *source_path){
     unsigned char* mirror_vert_data = calloc(W*H*CH,sizeof(unsigned char));
     for(Y=0;Y<H;Y++){
         for(X=0;X<W;X++){
-            pixelRGB*current_pixel=get_pixel(data,W,H,CH,X,Y);
+            pixelRGB* current_pixel=get_pixel(data,W,H,CH,X,Y);
             int Xnew=X;
             int Ynew=H-1-Y;
-            pixelRGB*mirror_vert_pixel=get_pixel(mirror_vert_data,W,H,CH,Xnew,Ynew);
-            mirror_vert_pixel->R=current_pixel->R;
-            mirror_vert_pixel->G=current_pixel->G;
-            mirror_vert_pixel->B=current_pixel->B;
+            pixelRGB* mirror_vert_pixel=get_pixel(mirror_vert_data,W,H,CH,Xnew,Ynew);
+            mirror_vert_pixel->R = current_pixel->R;
+            mirror_vert_pixel->G = current_pixel->G;
+            mirror_vert_pixel->B = current_pixel->B;
         }
     }
     write_image_data("image_out.bmp", mirror_vert_data,W,H);
+    free(mirror_vert_data);
 }
 void mirror_total(char *source_path){
     unsigned char* data=NULL;
     int W,H,CH,X,Y;
+
     read_image_data(source_path,&data,&W,&H,&CH);
     unsigned char* mirror_tot_data = calloc(W*H*CH,sizeof(unsigned char));
     for(Y=0;Y<H;Y++){
         for(X=0;X<W;X++){      
-            pixelRGB*current_pixel=get_pixel(data,W,H,CH,X,Y);
+            pixelRGB* original_pixel=get_pixel(data,W,H,CH,X,Y);
             int Xnew=W-1-X;
             int Ynew=H-1-Y;
             pixelRGB*mirror_tot_pixel=get_pixel(mirror_tot_data,W,H,CH,Xnew,Ynew);
-            mirror_tot_pixel->R=current_pixel->R;
-            mirror_tot_pixel->G=current_pixel->G;
-            mirror_tot_pixel->B=current_pixel->B;
+            mirror_tot_pixel->R = original_pixel->R;
+            mirror_tot_pixel->G = original_pixel->G;
+            mirror_tot_pixel->B = original_pixel->B;
         }
     }
     write_image_data("image_out.bmp", mirror_tot_data,W,H);
+    free(mirror_tot_data);
 }
 void scale_crop(char *sourcepath,int center_X,int center_Y,int W,int H){
     unsigned char* data=NULL;
@@ -173,15 +178,16 @@ void scale_crop(char *sourcepath,int center_X,int center_Y,int W,int H){
     if (first_X+W>og_W) W=og_W-first_X;
     if (first_Y+H>og_H) H=og_H-first_Y;
 
-    unsigned char* cropped_data = malloc(W*H*CH);
-    for(Y=0;Y<H;Y++){
+    unsigned char* cropped_data = malloc(W*H*CH); 
+    for (Y=0;Y<H;Y++){
         for(X=0;X<W;X++){
-            pixelRGB*current_og_pixel = get_pixel(data,og_W,og_H,CH,X+first_X,Y+first_Y);
-            pixelRGB*current_data_cropped_pixel = get_pixel(cropped_data,W,H,CH,X,Y);
-            current_data_cropped_pixel->R=current_og_pixel->R;
-            current_data_cropped_pixel->G=current_og_pixel->G;
-            current_data_cropped_pixel->B=current_og_pixel->B;
+            pixelRGB *src_og_pixel = get_pixel(data,og_W,og_H,CH,X+first_X,Y+first_Y);
+            pixelRGB *cur_data_cropped_pixel = get_pixel(cropped_data,W,H,CH,X,Y);
+            cur_data_cropped_pixel->R = src_og_pixel->R;
+            cur_data_cropped_pixel->G = src_og_pixel->G;
+            cur_data_cropped_pixel->B = src_og_pixel->B;
         }
     }
     write_image_data("image_out.bmp",cropped_data,W,H);
+    free(cropped_data);
 }
