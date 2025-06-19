@@ -17,7 +17,6 @@
 void helloWorld() {
     printf("Hello World !!!");
 }
-
 void dimension(char* source_path) {
 
     unsigned char* data = NULL;
@@ -25,7 +24,6 @@ void dimension(char* source_path) {
     read_image_data(source_path,&data,&W,&H,&CH);
     printf("dimension :%d,%d\n",W,H);
 }
-
 void first_pixel(char* source_path){
 
     unsigned char* data = NULL;
@@ -38,7 +36,8 @@ void first_pixel(char* source_path){
     unsigned char B=data[2];
  
     printf("first_pixel:%d,%d,%d",R,G,B);
-}void mirror_horizontal(char *source_path){
+}
+void mirror_horizontal(char *source_path){
     unsigned char* data=NULL;
     int W,H,CH,X,Y;
     read_image_data(source_path,&data,&W,&H,&CH);
@@ -57,21 +56,18 @@ void first_pixel(char* source_path){
     write_image_data("image_out.bmp", mirror_hor_data,W,H);
     free(mirror_hor_data);
 }
-
 void tenth_pixel (char *source_path) {
     unsigned char *data;
     int W,H,CH;
     read_image_data(source_path,&data,&W,&H,&CH);
     printf("tenth_pixel:%d,%d,%d\n",data[27],data[28],data[29]);
 }
-
 void second_line (char *source_path) {
     unsigned char *data;
     int W,H,CH;
     read_image_data(source_path,&data,&W,&H,&CH);
     printf("second_line:%d,%d,%d\n",data[W*3],data[W*3+1],data[W*3+2]);
 }
-
 void print_pixel(char* source_path,int X,int Y){
  
     unsigned char* data=NULL;
@@ -80,7 +76,6 @@ void print_pixel(char* source_path,int X,int Y){
     pixelRGB * pixel = get_pixel(data,W,H,CH,X,Y);
     printf("print_pixel(%d %d):%d,%d,%d\n",X,Y,pixel->R,pixel->G,pixel->B);
 }
-
 char* max_pixel(char* source_path){
     unsigned char* data=NULL;
     int W,H,CH,X,Y;
@@ -209,4 +204,34 @@ void rotate_cw(char *source_path){
     }
     write_image_data("image_out.bmp", rotate_cw_data, h, w);
     free(rotate_cw_data);
+}
+char* min_pixel(char* source_path){
+    unsigned char* data=NULL;
+    int W,H,CH,X,Y;
+	int S;
+    int Xmin=0;
+    int Ymin=0;
+ 
+    read_image_data(source_path,&data,&W,&H,&CH);
+    pixelRGB*min_pixel=get_pixel(data,W,H,CH,0,0);
+    pixelRGB*first_pixel=get_pixel(data,W,H,CH,0,0);
+    int Smin=first_pixel->R+first_pixel->G+first_pixel->B;
+    for(Y=0;Y<H;Y++){
+		
+        for(X=0;X<W;X++){
+            pixelRGB*pixel=get_pixel(data,W,H,CH,X,Y);
+            S=pixel->R+pixel->G+pixel->B;
+			
+            if(S<Smin){
+                Smin=S;
+                Xmin=X;
+                Ymin=Y;
+                min_pixel=pixel;
+            }
+        }
+    }
+    printf("min_pixel(%d %d):%d,%d,%d\n",Xmin,Ymin,min_pixel->R,min_pixel->G,min_pixel->B);
+    char* res=malloc(100);
+    sprintf(res,"min_pixel(%d %d):%d,%d,%d\n",Xmin,Ymin,min_pixel->R,min_pixel->G,min_pixel->B);
+    return res;
 }
