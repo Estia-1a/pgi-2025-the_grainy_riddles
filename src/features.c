@@ -162,30 +162,6 @@ void mirror_total(char *source_path){
     write_image_data("image_out.bmp", mirror_tot_data,W,H);
     free(mirror_tot_data);
 }
-void scale_crop(char *sourcepath,int center_X,int center_Y,int W,int H){
-    unsigned char* data=NULL;
-    int og_W,og_H,CH,X,Y;
-    read_image_data(sourcepath,&data,&og_W,&og_H,&CH);
-    int first_X=center_X-W/2;
-    int first_Y=center_Y-H/2;
-    if (first_X<0) first_X=0;
-    if (first_Y<0) first_Y=0;
-    if (first_X+W>og_W) W=og_W-first_X;
-    if (first_Y+H>og_H) H=og_H-first_Y;
-
-    unsigned char* cropped_data = malloc(W*H*CH); 
-    for (Y=0;Y<H;Y++){
-        for(X=0;X<W;X++){
-            pixelRGB *src_og_pixel = get_pixel(data,og_W,og_H,CH,X+first_X,Y+first_Y);
-            pixelRGB *cur_data_cropped_pixel = get_pixel(cropped_data,W,H,CH,X,Y);
-            cur_data_cropped_pixel->R = src_og_pixel->R;
-            cur_data_cropped_pixel->G = src_og_pixel->G;
-            cur_data_cropped_pixel->B = src_og_pixel->B;
-        }
-    }
-    write_image_data("image_out.bmp",cropped_data,W,H);
-    free(cropped_data);
-}
 void rotate_cw(char *source_path){
     unsigned char* data = NULL;
     int w, h, n, x, y;
