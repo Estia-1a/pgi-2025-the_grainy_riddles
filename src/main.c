@@ -31,56 +31,52 @@ int main(int argc, char **argv) {
     /* helloworld() function is defined in feature.h and implemented in feature.c */
     helloWorld();
   }
-  if ( strncmp( configuration.command, "mirror_horizontal", 17 ) == 0 ) {
-    mirror_horizontal(configuration.filenames[0]);
-  }
   /*
    * TO COMPLETE
    */
  
-    if ( strncmp( configuration.command, "dimension", 9 ) == 0 ) {
+  if ( strncmp( configuration.command, "dimension", 9 ) == 0 ) {
     /* dimension() function is defined in feature.h and implemented in feature.c */
     dimension(configuration.filenames[0]);
-    }
-    
-    if ( strncmp( configuration.command, "first_pixel", 11 ) == 0 ) {
+  } 
+  if ( strncmp( configuration.command, "first_pixel", 11 ) == 0 ) {
     /* first_pixel() function is defined in feature.h and implemented in feature.c */
     first_pixel(configuration.filenames[0]);
-    }
-    
-    if ( strncmp( configuration.command, "tenth_pixel", 11 ) == 0 ) {
+  } 
+  if ( strncmp( configuration.command, "tenth_pixel", 11 ) == 0 ) {
     /* tenth_pixel() function is defined in feature.h and implemented in feature.c */
     tenth_pixel(configuration.filenames[0]);
-    }
-    
-    if ( strncmp( configuration.command, "second_line", 11 ) == 0 ) {
+  }
+  if ( strncmp( configuration.command, "second_line", 11 ) == 0 ) {
     /* second_line() function is defined in feature.h and implemented in feature.c */
     second_line(configuration.filenames[0]);
-    }
-
-    if ( strncmp( configuration.command, "print_pixel", 11 ) == 0 ) {
+  }
+  if ( strncmp( configuration.command, "print_pixel", 11 ) == 0 ) {
     /* print_pixel() function is defined in feature.h and implemented in feature.c */
     print_pixel(configuration.filenames[0] ,atoi(configuration.arguments[0]) ,atoi(configuration.arguments[1]));
-    }
-
-    if ( strncmp( configuration.command, "max_pixel", 9 ) == 0 ) {
+  }
+  if ( strncmp( configuration.command, "max_pixel", 9 ) == 0 ) {
     max_pixel(configuration.filenames[0]);
-    }
-     return 0;
-    if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
-    rotate_cw(configuration.filenames[0]);
-    }
-    if ( strncmp( configuration.command, "mirror_vertical", 15 ) == 0 ) {
+  }
+  if ( strncmp( configuration.command, "mirror_horizontal", 17 ) == 0 ) {
+    mirror_horizontal(configuration.filenames[0]);
+  }
+  if ( strncmp( configuration.command, "rotate_acw", 10 ) == 0 ) {
+    rotate_acw(configuration.filenames[0]);
+  }
+  if ( strncmp( configuration.command, "mirror_vertical", 15 ) == 0 ) {
     mirror_vertical(configuration.filenames[0]);
   }
   if ( strncmp( configuration.command, "mirror_total", 15 ) == 0 ) {
     mirror_total(configuration.filenames[0]);
   }
-  if ( strncmp( configuration.command, "scale_crop", 10 ) == 0 ) {
-    scale_crop(configuration.filenames[0],atoi(configuration.arguments[0]) ,atoi(configuration.arguments[1]) ,atoi(configuration.arguments[2]) ,atoi(configuration.arguments[3]));
+  if ( strncmp( configuration.command, "min_pixel", 9 ) == 0 ) {
+    min_pixel(configuration.filenames[0]);
   }
-  if ( strncmp( configuration.command, "rotate_cw", 9 ) == 0 ) {
-    rotate_cw(configuration.filenames[0]);
+  if ( strncmp( configuration.command, "max_component", 13 ) == 0 ) {
+   
+    max_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
+  return 0;
+    
 }
-
