@@ -347,3 +347,85 @@ void stat_report(char *source_path){
     fprintf(report,"%s",min_componentB);
     fclose(report);
 }
+void color_red(char *source_path){
+    unsigned char* data=NULL;
+    int W,H,CH,X,Y;
+    read_image_data(source_path,&data,&W,&H,&CH);
+    for(Y=0;Y<H;Y++){
+
+        for(X=0;X<W;X++){
+            pixelRGB*pixel=get_pixel(data,W,H,CH,X,Y);
+            pixel->G=0;
+            pixel->B=0;
+        }
+    }
+    write_image_data("image_out.bmp",data,W,H);
+}
+void color_green (char *source_path) {
+    unsigned char *data;
+    int W,H,CH;
+ 
+    read_image_data(source_path,&data,&W,&H,&CH);
+ 
+    for(int k=0;k<W*H;k++) {
+        data[3*k]=0;
+        data[2+3*k]=0;
+    }
+    write_image_data("image_verte.bmp",data,W,H);
+    printf("color_green\n");
+}
+void color_blue (char *source_path) {
+    unsigned char *data;
+    int W,H,CH;
+ 
+    read_image_data(source_path, &data, &W, &H, &CH);
+ 
+    for(int k=0;k<W*H;k++) {
+        data[3*k]=0;
+        data[1+3*k]=0;
+    }
+    write_image_data("image_bleu.bmp",data,W,H);
+    printf("color_blue\n");
+}
+void color_gray (char *source_path) {
+    unsigned char *data;
+    int W,H,CH;
+ 
+    read_image_data(source_path,&data,&W,&H,&CH);
+ 
+    for (int k=0;k<3*W*H;k+=3) {
+        unsigned char gray = (data[k] + data[k+1] + data[k+2]) / 3;
+        data[k] = gray;
+        data[k+1] = gray;
+        data[k+2] = gray;
+    }
+    write_image_data("image_grise.bmp",data,W,H);
+    printf("color_gray\n");
+}
+void color_gray_luminance (char *source_path) {
+    unsigned char *data;
+    int W,H,CH;
+ 
+    read_image_data(source_path,&data,&W,&H,&CH);
+ 
+    for (int k=0;k<3*W*H;k+=3) {
+        unsigned char gray=(0.21*data[k]+0.72*data[k+1]+0.07*data[k+2]);
+        data[k]=gray;
+        data[k+1]=gray;
+        data[k+2]=gray;
+    }
+    write_image_data("image_grise_luminance.bmp",data,W,H);
+    printf("color_gray_luminance\n");
+}
+void color_invert(char *source_path) {
+    unsigned char *data;
+    int W,H,CH;
+ 
+    read_image_data(source_path,&data,&W,&H,&CH);
+ 
+    for (int k=0;k<3*W*H;k++) {
+        data[k]=255-data[k];
+    }
+    write_image_data("image_inversion.bmp",data,W,H);
+    printf("color_invert\n");
+}
