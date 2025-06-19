@@ -158,7 +158,7 @@ void mirror_total(char *source_path){
             pixelRGB* original_pixel=get_pixel(data,W,H,CH,X,Y);
             int Xnew=W-1-X;
             int Ynew=H-1-Y;
-            pixelRGB*mirror_tot_pixel=get_pixel(mirror_tot_data,W,H,CH,Xnew,Ynew);
+            pixelRGB* mirror_tot_pixel=get_pixel(mirror_tot_data,W,H,CH,Xnew,Ynew);
             mirror_tot_pixel->R = original_pixel->R;
             mirror_tot_pixel->G = original_pixel->G;
             mirror_tot_pixel->B = original_pixel->B;
@@ -190,4 +190,23 @@ void scale_crop(char *sourcepath,int center_X,int center_Y,int W,int H){
     }
     write_image_data("image_out.bmp",cropped_data,W,H);
     free(cropped_data);
+}
+void rotate_cw(char *source_path){
+    unsigned char* data = NULL;
+    int w, h, n, x, y;
+    read_image_data(source_path, &data, &w, &h, &n);
+    unsigned char* rotate_cw_data = malloc(w * h * n);
+    for(y=0; y<h; y++){
+        for(x=0; x<w; x++){      
+            pixelRGB* current_pixel = get_pixel(data, w, h, n, x, y);
+            int nouveau_x = h - 1 - y;
+            int nouveau_y = x;
+            pixelRGB* rotate_cw_pixel = get_pixel(rotate_cw_data, h, w, n, nouveau_x, nouveau_y);
+            rotate_cw_pixel->R = current_pixel->R;
+            rotate_cw_pixel->G = current_pixel->G;
+            rotate_cw_pixel->B = current_pixel->B;
+        }
+    }
+    write_image_data("image_out.bmp", rotate_cw_data, h, w);
+    free(rotate_cw_data);
 }
