@@ -1,0 +1,23 @@
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c: In function ‘main’:
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c:43:5: warning: implicit declaration of function ‘dimension’ [-Wimplicit-function-declaration]
+   43 |     dimension(configuration.filenames[0]);
+      |     ^~~~~~~~~
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c:48:5: warning: implicit declaration of function ‘first_pixel’; did you mean ‘get_pixel’? [-Wimplicit-function-declaration]
+   48 |     first_pixel(configuration.filenames[0]);
+      |     ^~~~~~~~~~~
+      |     get_pixel
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c:53:5: warning: implicit declaration of function ‘tenth_pixel’; did you mean ‘get_pixel’? [-Wimplicit-function-declaration]
+   53 |     tenth_pixel(configuration.filenames[0]);
+      |     ^~~~~~~~~~~
+      |     get_pixel
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c:58:5: warning: implicit declaration of function ‘second_line’ [-Wimplicit-function-declaration]
+   58 |     second_line(configuration.filenames[0]);
+      |     ^~~~~~~~~~~
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c:63:5: warning: implicit declaration of function ‘print_pixel’; did you mean ‘get_pixel’? [-Wimplicit-function-declaration]
+   63 |     print_pixel(configuration.filenames[0] ,atoi(configuration.arguments[0]) ,atoi(configuration.arguments[1]));
+      |     ^~~~~~~~~~~
+      |     get_pixel
+/home/runner/work/pgi-2025-the_grainy_riddles/pgi-2025-the_grainy_riddles/src/main.c:67:5: warning: implicit declaration of function ‘max_pixel’; did you mean ‘get_pixel’? [-Wimplicit-function-declaration]
+   67 |     max_pixel(configuration.filenames[0]);
+      |     ^~~~~~~~~
+      |     get_pixel
